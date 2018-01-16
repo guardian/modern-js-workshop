@@ -39,7 +39,7 @@ const { div, header, main, footer, nav, h1, h2, ul, li, a } = Object.entries(
 ).reduce(
   (out, [tag, attrs]) => ({
     ...out,
-    [tag]: createDOMNodeEl(tag, attrs.concat(BASE_ATTRS))
+    [tag]: createDOMNodeEl(tag, [...attrs, ...BASE_ATTRS])
   }),
   {}
 );
@@ -51,8 +51,8 @@ const render = (child, node) => {
   } else {
     const { tag, attrs, children = [] } = child;
     el = document.createElement(tag);
-    Object.keys(attrs).forEach(attr => {
-      el.setAttribute(attr, attrs[attr]);
+    Object.entries(attrs).forEach(([attr, val]) => {
+      el.setAttribute(attr, val);
     });
     children.forEach(c => render(c, el));
   }
@@ -73,11 +73,10 @@ const qs = obj =>
 
 // Fetch the news
 const fetchTheNews = async (params = {}) => {
-  const queryString = qs(
-    Object.assign({}, params, {
-      "api-key": API_KEY
-    })
-  );
+  const queryString = qs({
+    ...params,
+    "api-key": API_KEY
+  });
   const response = await fetch(`${API_BASE}${queryString}`);
   return /* await */ response.json(); // async automatically awaits return
 };
