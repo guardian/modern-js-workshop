@@ -1,0 +1,8 @@
+{
+  "name": "modern-js-workshop",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/guardian/modern-js-workshop",
+  "author": "The Guardian",
+  "license": "MIT"
+}
