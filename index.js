@@ -19,14 +19,14 @@ const createDOMNodeEl = (tag, propTypes = []) => (props = {}, ...children) => ({
   children
 });
 
-const BASE_ATTRS = ["class"];
+const BASE_ATTRS = ["class", "role"];
 
 const DOM_NODE_SPECS = {
   div: [],
-  header: ["role"],
+  header: [],
   main: [],
   footer: [],
-  nav: ["role"],
+  nav: [],
   h1: [],
   h2: [],
   ul: [],
@@ -93,7 +93,9 @@ const Item = ({ webTitle, webUrl, sectionName }) =>
 const Items = ({ items }) =>
   div({},
     nav({ role: "navigation" },
-      ul({}, ...items.map(Item))
+      ul({},
+        ...items.map(Item)
+      )
     )
   );
 
