@@ -1,5 +1,5 @@
 const API_BASE = "http://content.guardianapis.com/search";
-const API_KEY = "teleporter-view";
+const API_KEY = "0ccb3e45-8ac1-429b-90aa-456ba71ec319";
 
 /*
   --- The "React" library ---
