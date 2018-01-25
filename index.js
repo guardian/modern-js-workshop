@@ -2,25 +2,85 @@ const API_BASE = "http://content.guardianapis.com/search";
 const API_KEY = "0ccb3e45-8ac1-429b-90aa-456ba71ec319";
 
 /*
-  --- The "React" library ---
+  --- The VDOM library ---
 */
 
-const createDOMNodeEl = (tag, propTypes = []) => (props = {}, ...children) => ({
+/*
+createDOMNodeEl
+
+Returns a factory function for creating Virtual DOM elements with
+whitelisted attributes:
+
+const div = createDOMNodeEl("div", ["class", "id", "style"]);
+const header = createDOMNodeEl("header", ["class", "id", "style"]);
+
+This will now let us call `div` or `header` with an object specifying the values
+for its attributes and any children that it has. Any invalid attributes will not
+be added to the VDOM element (and ultimately not to the DOM):
+
+const vDOMHeader = header({ class: "header" });
+const vDOMDiv = div({ class: "app", title: "won't appear" }, vDOMHeader);
+
+vDOMDiv will now represent the following object which will serve as a spec to
+pass to the render function:
+{
+  tag: 'div',
+  attrs: {
+    class: "app"
+  },
+  children: [
+    {
+      type: 'header',
+      attrs: {
+         class: "header"
+      },
+      children: [],
+    }
+  ]
+}
+*/
+
+const createDOMNodeEl = (tag, allowedAttrs = []) => (
+  attrs = {},
+  ...children
+) => ({
   tag,
-  attrs: Object.keys(props)
-    .filter(prop => propTypes.includes(prop))
+  attrs: Object.entries(attrs)
+    .filter(([attr]) => allowedAttrs.includes(attr))
     .reduce(
-      (out, prop) => ({
+      (out, [attr, val]) => ({
         ...out,
-        [prop]: props[prop]
+        [attr]: val
       }),
       {}
     ),
   children
 });
 
-const BASE_ATTRS = ["class", "role"];
+/*
+The render function takes a VDOM representation and recurses through the nodes
+(through the "children" property) and creates and appends the actual DOM nodes
+*/
 
+const render = (vDOMEl, node) => {
+  let el;
+  if (typeof vDOMEl === "string") {
+    el = document.createTextNode(vDOMEl);
+  } else {
+    const { tag, attrs, children = [] } = vDOMEl;
+    el = document.createElement(tag);
+    Object.entries(attrs).forEach(([attr, val]) => {
+      el.setAttribute(attr, val);
+    });
+    children.forEach(vDOMChild => render(vDOMChild, el));
+  }
+  node.appendChild(el);
+};
+
+/*
+These contants are used to define out VDOM factories
+*/
+const BASE_ATTRS = ["class", "role"];
 const DOM_NODE_SPECS = {
   div: [],
   header: [],
@@ -34,30 +94,29 @@ const DOM_NODE_SPECS = {
   a: ["href", "title", "target"]
 };
 
-const { div, header, main, footer, nav, h1, h2, ul, li, a } = Object.entries(
-  DOM_NODE_SPECS
-).reduce(
-  (out, [tag, attrs]) => ({
-    ...out,
-    [tag]: createDOMNodeEl(tag, [...attrs, ...BASE_ATTRS])
-  }),
-  {}
-);
+/*
+createDOMNodes
 
-const render = (child, node) => {
-  let el;
-  if (typeof child === "string") {
-    el = document.createTextNode(child);
-  } else {
-    const { tag, attrs, children = [] } = child;
-    el = document.createElement(tag);
-    Object.entries(attrs).forEach(([attr, val]) => {
-      el.setAttribute(attr, val);
-    });
-    children.forEach(c => render(c, el));
-  }
-  node.appendChild(el);
-};
+Takes an array of DOM node specs (see above) and runs createDOMNodeEl on them to
+create VDOM factories
+*/
+
+const createDOMNodes = (specs, baseSpecs) =>
+  Object.entries(specs).reduce(
+    (out, [tag, attrs]) => ({
+      ...out,
+      [tag]: createDOMNodeEl(tag, [...attrs, ...baseSpecs])
+    }),
+    {}
+  );
+
+/*
+These are now are the VDOM factories to use in our app!
+*/
+const { div, header, main, footer, nav, h1, h2, ul, li, a } = createDOMNodes(
+  DOM_NODE_SPECS,
+  BASE_ATTRS
+);
 
 /*
   --- The App ---
@@ -81,7 +140,7 @@ const fetchTheNews = async (params = {}) => {
   return /* await */ response.json(); // async automatically awaits return
 };
 
-/* The "React" components */
+/* Higher order functions composing our VDOM factories */
 
 const Item = ({ webTitle, webUrl, sectionName }) =>
   li({},
