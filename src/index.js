@@ -2,7 +2,7 @@
   --- The App ---
 */
 
-const { div, header, main, footer, nav, h1, h2, ul, li, a } = GuDOM;
+const { div, header, main, footer, nav, h1, h2, ul, li, a, p } = GuDOM;
 
 /* Run the app */
 
@@ -18,17 +18,25 @@ const { div, header, main, footer, nav, h1, h2, ul, li, a } = GuDOM;
       ),
       main({},
         div({},
+          h2({},
+            "News"
+          ),
           nav({ role: "navigation" },
             ul({},
               ...results.map(({ webTitle, webUrl, sectionName }) =>
                 li({},
-                  a({ href: webUrl, title: webTitle, target: "_blank" },
+                  a({ href: webUrl, title: webTitle, target: "_blank", rel: "noopener" },
                     `${sectionName} : ${webTitle}`
                   )
                 )
               )
             )
           )
+        )
+      ),
+      footer({},
+        p({},
+          `© The Guardian ${new Date().toLocaleDateString("en-GB", { year: "numeric" })}`
         )
       )
     );
