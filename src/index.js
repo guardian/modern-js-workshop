@@ -7,7 +7,7 @@ const { div, header, main, footer, nav, h1, h2, ul, li, a } = GuDOM;
 /* Run the app */
 
 (async () => {
-  const { response: { results } } = await CAPI.fetchTheNews();
+  const { response: { results } } = await CAPI.fetchLatest(10);
 
   const vDOM =
     div({ class: "app" },
