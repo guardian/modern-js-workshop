@@ -1,5 +1,5 @@
 # ModernJS - Babel
-## Weclome to Modern JS
+## Welcome to Modern JS
 [Intro to the 4 weeks]
 
 ## Babel
@@ -34,7 +34,7 @@ function myFunc(a) {
   return a + 2;
 }
 ```
-- Some of the language features are new native APIs that are implementable (albeit less efficiently) in ES5 javascript and require a polyfill (e.g. Promise), this isn't handled by Babel transpilation! (Guardian uses polyfill.io [does it?!])
+- Some of the language features are new native APIs that are implementable (albeit less efficiently) in ES5 javascript and require a polyfill (e.g. `async / await`), this isn't handled by Babel transpilation! (theguardian.com currently uses [polyfill.io](https://polyfill.io))
 - Some are not possible to completely polyfill (e.g. extending a built in class isn't possible in ES5) so they approximate functionality but may not work in all cases.
 
 ## The project
@@ -46,7 +46,7 @@ We can test out the project now by running `yarn start` inside the project folde
 
 ## Getting Babel into a project
 This is the process to follow to get Babel into our project:
-- Install babel and it's CLI tool into the project
+- Install babel and its CLI tool into the project
 - Configure babel: tell it what syntax we want to transform
 - Run babel on our code
 - Add in a polyfill for any missing APIs (babel doesn't handle these)
@@ -64,7 +64,7 @@ The Babel docs have pretty comprehensive info on this but it can sometimes be a 
 - We now have babel installed but we need to tell it the syntax we're using that we want to transpile
 - Babel transpiles *nothing* by default but instead uses plugins, we tell babel what to transpile by installing and specifying those plugins.
 - Babel, like a lot of javascript tooling, uses an "rc file" in the project root - by default this is `.babelrc` - for setting configuation
-  - You can pass arguments to babel through the command line, or the Node API but having them specified in an rc file, project-wide means less repetition if you're have other libraries in your project that use babel and you want the same setup (e.g. `babel-jest` or `webpack`)
+  - You can pass arguments to babel through the command line, or the Node API but having them specified in an rc file, project-wide means less repetition if you have other libraries in your project that use babel and you want the same setup (e.g. `babel-jest` or `webpack`)
 - For now we'll just need a file that tells babel what plugins we're using in a json format - the biggest use case for a `.babelrc` file:
 ```json
 {
@@ -92,7 +92,7 @@ Very useful and is now stage-4 although not moved to stage 4 in babel so we've a
 ### Running Babel
 Installing `babel-cli` gave us a file in `node_modules/.bin` called `babel` that acts as the babel CLI (this pattern is nice as node can install all binary dependencies without relying on the environment to provide them). We can call this file `$(yarn bin)/babel` (`$(yarn bin)` gives us the absolute path to this bin file - try typing `yarn bin` into the command line). We only need to specify two things:
 - A directory (or file) to run it on (the first command line argument)
-- An output directory (or file) - specfied with the `-d` or `-o` (for file) flag.
+- An output destination - specfied with the `-d` (for a directory) or `-o` (for file) flag.
 
 All of these things together mean we can run `mkdir -p dist && $(yarn bin)/babel src -d dist`.
 
@@ -112,7 +112,7 @@ To save us typing this each time we can instead add a `script` inside our packag
 We now just need to change our `index.html` file to load these `dist` files rather than our `src` files. If you load the browser then hopefully nothing should have changed!
 
 ### Polyfilling
-Finally, even though we porbably won't see any errors (even in Safari), as mentioned above we will need to polyfill missing functions from later browsers.
+Finally, even though we probably won't see any errors (even in Safari), as mentioned above we will need to polyfill missing functions from later browsers.
 
 If you look in `dist/services/CAPI.js` you'll see references to `regeneratorRuntime` which babel needs to support `async / await` in older browsers. As mentioned earlier this requires polyfilling.
 
