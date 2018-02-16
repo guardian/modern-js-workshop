@@ -9,7 +9,7 @@ We'll go through briefly what Babel does, why we use it and how to set it up in 
 
 When opening the project and looking around, if you haven't looked at JS for a while there may be some newer syntax you don't understand. It's not just you; some older browsers won't understand this either, which is why we want Babel.
 ### What is Babel?
-- It is a 'transpiler', converting Javascript to Javascript
+- It is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler), converting Javascript to Javascript
 
 ### Why do we want this
 - Javascript has many different runtimes
@@ -38,10 +38,6 @@ function myFunc(a) {
 - Some are not possible to completely polyfill (e.g. extending a built in class isn't possible in ES5) so they approximate functionality but may not work in all cases.
 
 ## The project
-The app we're looking at revolves around a *tiny* Virtual DOM library (a pattern popular with libraries like React and Vue).
-
-The app make a request to CAPI and then uses the VDOM library to render the response the DOM and show a "Guardian" front page.
-
 We can test out the project now by running `yarn start` inside the project folder and navigating to the URL shown in the output. This will probably work fine in Chrome and Firefox but in Safari (at time of writing) it will have trouble with some of the syntax.
 
 ## Getting Babel into a project
@@ -116,13 +112,17 @@ Finally, even though we probably won't see any errors (even in Safari), as menti
 
 If you look in `dist/services/CAPI.js` you'll see references to `regeneratorRuntime` which babel needs to support `async / await` in older browsers. As mentioned earlier this requires polyfilling.
 
-There are plenty of complex ways to load polyfills so that you don't load more than a browser needs (polyfill.io, import while bundling `useBuiltIns`) but for now we'll just load the whole polyfill from a CDN and drop it in.
+There are plenty of complex ways to load polyfills so that you don't load more than a browser needs (polyfill.io, import while bundling `useBuiltIns`) but for now we'll just load the whole polyfill from a CDN and drop it in. At the time of writing we're using the v7 beta 3 version of the [polyfill](https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0-beta.3/polyfill.min.js) in line with the babel version we're using. (Aside: Everything under babel's [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) moves forward with the same version number thanks to [lerna](https://lernajs.io/))
+
 
 ## We're done!
 This is the simplest way to get modern javascript running in most of the environments.
 
 ## Caveats
 Babel plugins can potentially turn *anything* to JS. And there are a lot of plugins that do. While it may be tempting to bring some into your project it's probably best to stick to `env` and the `stage-4` code for Guardian projects. Ultimately you want any JS developer to be able to touch your codebase, and the further you get away from standards javascript the harder it will be for most people to touch!
+
+# Extensions
+[Maybe we could add how to build a very simple plugin in if we feel like we're targeting people who are largely familiar with babel?]
 
 # References
 - [Babel ES2015](https://babeljs.io/learn-es2015/) - docs on the transforms for the ES2015 spec (slightly outdated but a good guide)
