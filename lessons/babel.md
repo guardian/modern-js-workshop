@@ -52,19 +52,23 @@ The Babel docs have pretty comprehensive info on this but it can sometimes be a 
 
 - So first let's install babel into our project using our package manager
   - We're using `yarn` so we need to run `yarn add --dev @babel/core @babel/cli` (for `npm i --save-dev @babel/core @babel/cli`)
-    - `@babel/cli`, as the name suggests, gives us a command line interfact to use babel
+    - `@babel/cli`, as the name suggests, gives us a command line interface to use babel
     - `@babel/core` is the main babel code and `@babel/cli` will complain if we don't have it installed
   - This will add both of those packages to our `node_modules` folder
 
-### Configurating Babel
+### Configuring Babel
 - We now have babel installed but we need to tell it the syntax we're using that we want to transpile
 - Babel transpiles *nothing* by default but instead uses plugins, we tell babel what to transpile by installing and specifying those plugins.
 - Babel, like a lot of javascript tooling, uses an "rc file" in the project root - by default this is `.babelrc` - for setting configuation
   - You can pass arguments to babel through the command line, or the Node API but having them specified in an rc file, project-wide means less repetition if you have other libraries in your project that use babel and you want the same setup (e.g. `babel-jest` or `webpack`)
-- For now we'll just need a file that tells babel what plugins we're using in a json format - the biggest use case for a `.babelrc` file:
+- For now we'll just need a file that tells babel what plugins we're using in a json format - the biggest use case for a `.babelrc` file
 ```json
 {
-  "presets": ["@babel/env"],
+  "presets": ["@babel/env", {
+    "targets": {
+      "browsers": ["> 1%", "last 2 versions", "IE >= 9"]
+    }
+  }],
   "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
 ```
@@ -72,6 +76,9 @@ The Babel docs have pretty comprehensive info on this but it can sometimes be a 
 
 #### Aside: Presets and plugins
 "Presets" are just a packaged list of "plugins"
+
+##### Object rest spread
+Very useful and is now stage-4 although not moved to stage 4 in babel so we've added it here as a good example of a plugin
 
 ##### Preset env
 Preset env is a "special" preset that contains all "stage-4" proposals from the TC39 committee - the committee that decides on the ECMA spec (the one that Javascript follows)
@@ -82,8 +89,7 @@ Preset env is a "special" preset that contains all "stage-4" proposals from the 
 - stage-3 - Candidate
 - stage-4 - Finished (will be added to the spec, waiting to be implemented in runtimes)
 
-##### Object rest spread
-Very useful and is now stage-4 although not moved to stage 4 in babel so we've added it here as a good example of a plugin
+Also you can see we're specifying `targets.browsers` in the options. This uses [browser list](https://github.com/ai/browserslist#queries) for the queries and [compat-table](https://github.com/kangax/compat-table) to cross reference the ES features supported by those browsers and transforms accordingly!
 
 ### Running Babel
 Installing `babel-cli` gave us a file in `node_modules/.bin` called `babel` that acts as the babel CLI (this pattern is nice as node can install all binary dependencies without relying on the environment to provide them). We can call this file `$(yarn bin)/babel` (`$(yarn bin)` gives us the absolute path to this bin file - try typing `yarn bin` into the command line). We only need to specify two things:
@@ -114,7 +120,6 @@ If you look in `dist/services/CAPI.js` you'll see references to `regeneratorRunt
 
 There are plenty of complex ways to load polyfills so that you don't load more than a browser needs (polyfill.io, import while bundling `useBuiltIns`) but for now we'll just load the whole polyfill from a CDN and drop it in. At the time of writing we're using the v7 beta 3 version of the [polyfill](https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0-beta.3/polyfill.min.js) in line with the babel version we're using. (Aside: Everything under babel's [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) moves forward with the same version number thanks to [lerna](https://lernajs.io/))
 
-
 ## We're done!
 This is the simplest way to get modern javascript running in most of the environments.
 
@@ -122,9 +127,16 @@ This is the simplest way to get modern javascript running in most of the environ
 Babel plugins can potentially turn *anything* to JS. And there are a lot of plugins that do. While it may be tempting to bring some into your project it's probably best to stick to `env` and the `stage-4` code for Guardian projects. Ultimately you want any JS developer to be able to touch your codebase, and the further you get away from standards javascript the harder it will be for most people to touch!
 
 # Extensions
-[Maybe we could add how to build a very simple plugin in if we feel like we're targeting people who are largely familiar with babel?]
+## How does Babel work?
+- Babel converts Javascript to an AST using the Babylon parser
+- Each plugin is required to implement the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
+- The spec for the current supported AST nodes is [here](https://github.com/babel/babylon/blob/master/ast/spec.md)
+- If we define a plugin for anyone of those nodes it will be run on that node, will receive that node as a parameter to the method
+- The plugin also gets an instance of `babel-types` which is a helper for *creating* AST nodes. These can be used with methods on the node like `path.replaceWith(types.stringLiteral("Guardian"))`
 
 # References
+- [REPL](https://babeljs.io/repl/)
 - [Babel ES2015](https://babeljs.io/learn-es2015/) - docs on the transforms for the ES2015 spec (slightly outdated but a good guide)
 - [Babel polyfill](https://babeljs.io/docs/usage/polyfill/) - docs on what the polyfill covers and how it crosses over with Babel
 - [TC39 Github](https://github.com/tc39/proposals) - list of all the current proposals for the language
+- [Babel Plugin Handbook](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md)
