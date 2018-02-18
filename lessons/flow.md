@@ -123,10 +123,14 @@ In order to tell the compiler which file it should check, you need to mark it as
 Then the compiler will analise all these files at compile time to ensure consistency across the type definitions. 
 
 ## 3. Writing Flow code
+
 ## 4. Where do we use it at The Guardian?
+* [frontend](https://github.com/guardian/frontend)
+* [support-frontend](https://github.com/guardian/support-frontend)
+
 ## 5. Resources
-
+* [Flow website](https://flow.org/)
 * [Flow cheat sheet](https://www.saltycrane.com/flow-type-cheat-sheet/latest/)
-
+* [Fast and Precise Type Checking for JavaScript (Flow paper)](http://delivery.acm.org/10.1145/3140000/3133872/oopsla17-oopsla179.pdf?ip=86.163.232.185&id=3133872&acc=OA&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2EC1E31BC46E58D5B8&__acm__=1518982362_28510adef31f2c5ca06e91476f4d1e96)
 
 
