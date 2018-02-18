@@ -8,7 +8,8 @@
           "browsers": ["> 1%", "last 2 versions", "IE >= 9"]
         }
       }
-    ]
+    ],
+    "@babel/preset-flow"
   ],
   "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
