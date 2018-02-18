@@ -1,8 +1,39 @@
+// @flow
+
+/* Types */
+
+type TagName =
+  | "div"
+  | "header"
+  | "main"
+  | "footer"
+  | "nav"
+  | "h1"
+  | "h2"
+  | "ul"
+  | "li"
+  | "a"
+  | "p";
+
+export type DomNode = {
+  tag: TagName,
+  attrs: {
+    [string]: string
+  },
+  children: DomNode[];
+}
+
+export type GuDOMObj = {
+  [TagName]: (Object, DomNode[]) => DomNode,
+  render: ((DomNode | string), (HTMLElement | null)) => void,
+}
+
+
 /*
   --- The VDOM library ---
 */
 
-const GuDOM = (() => {
+const GuDOM: GuDOMObj = (() => {
   /*
   createDOMNodeEl
 
@@ -37,7 +68,7 @@ const GuDOM = (() => {
   }
   */
 
-  const createDOMNodeEl = tag => (attrs = {}, ...children) => ({
+  const createDOMNodeEl: (TagName) => ({[string]:string}) => DomNode = tag => (attrs = {}, ...children) => ({
     tag,
     attrs,
     children
@@ -48,7 +79,9 @@ const GuDOM = (() => {
   */
   const setElementAttributes = (el, attrs = {}) =>
     Object.entries(attrs).forEach(([attr, val]) => {
-      el.setAttribute(attr, val);
+      if(typeof val === 'string') {
+        el.setAttribute(attr, val);
+      }
     });
 
   /*
@@ -56,8 +89,9 @@ const GuDOM = (() => {
   (through the "children" property) and creates and appends the actual DOM nodes
   */
 
-  const render = (vDOMEl, node) => {
-    let el;
+  const render = (vDOMEl: DomNode | string, node: Text | HTMLElement | null) => {
+    let el: HTMLElement | Text;
+
     if (typeof vDOMEl === "string") {
       el = document.createTextNode(vDOMEl);
     } else {
@@ -66,14 +100,17 @@ const GuDOM = (() => {
       setElementAttributes(el, attrs);
       children.forEach(vDOMChild => render(vDOMChild, el));
     }
-    node.appendChild(el);
+
+    if(node) {
+      node.appendChild(el);
+    }
   };
 
   /*
   These strings will be used to create functions of the same name that create
   vDOM nodes that represent tags of the same name!.
   */
-  const TAG_NAMES = [
+  const TAG_NAMES: TagName[] = [
     "div",
     "header",
     "main",
@@ -94,7 +131,7 @@ const GuDOM = (() => {
   create an object with each key being a VDOM factory for that tag
   */
 
-  const createDOMNodes = tags =>
+  const createDOMNodes: (TagName[]) => {[TagName]: (Object, DomNode[]) => DomNode} = tags =>
     tags.reduce(
       (out, tag) => ({
         ...out,

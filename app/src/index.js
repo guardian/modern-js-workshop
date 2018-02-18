@@ -1,6 +1,10 @@
+// @flow
+
 /*
   --- The App ---
 */
+
+import type { DomNode } from './lib/GuDOM';
 
 const { div, header, main, footer, nav, h1, h2, ul, li, a, p } = GuDOM;
 
@@ -9,7 +13,7 @@ const { div, header, main, footer, nav, h1, h2, ul, li, a, p } = GuDOM;
 (async () => {
   const { response: { results } } = await CAPI.fetchLatest(10);
 
-  const vDOM =
+  const vDOM: DomNode =
     div({ class: "app" },
       header({},
         h1({},
