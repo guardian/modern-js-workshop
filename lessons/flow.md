@@ -36,13 +36,13 @@ From [Flow's paper](https://dl.acm.org/citation.cfm?doid=3152284.3133872) it is 
 mistakes — like mistyped property names, out-of-order arguments, references to missing values, checks that never fail due 
 to implicit conversions, and so on — and worse, unraveling assumption and guarantees in code written by others."
 
-In other words, Flow catch a large number of common bugs with few false positives and therefore gives the developer the 
-confidence that her or his code is more robust.  
+In other words, Flow catch a large number of common bugs with few false positives and therefore the developer is more 
+confident that her or his code is more robust.  
 
 ### Flow vs Typescript
 
 Typescript is a programming language which is a superset of Javascript. Additionally, it also adds static typing. 
-There is an ongoing discussion about which option is better (Flow or typescript). Even though that decision abosolutly 
+There is an [ongoing discussion](https://news.ycombinator.com/item?id=11844574) about which option is better (Flow or typescript). Even though that decision abosolutly 
 depends on the context of the project, it is fair to mention that according to [this paper](http://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf) 
 both have roughly equivalent power in their ability to detect bugs.
 
