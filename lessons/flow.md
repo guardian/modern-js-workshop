@@ -4,8 +4,8 @@
 
 ## Table of contents
 1. [Introduction](#1-introduction)
-    * [What is Flow?](#what-is-flow?)
-    * [Flow's purpose](#flow's-purpose)
+    * [What is Flow?](#what-is-flow)
+    * [Flow's purpose](#flows-purpose)
     * [Flow vs Typescript](#flow-vs-typescript)
 2. [Getting started](#2-getting-started)
    * [Setup the compiler](#setup-the-compiler)
