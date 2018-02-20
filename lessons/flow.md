@@ -3,7 +3,10 @@
 # Modern JS workshop - Flow
 
 ## Table of contents
-1. [What is Flow?](#1-what-is-flow)
+1. [Introduction](#1-introduction)
+    * [What is Flow?](#what-is-flow?)
+    * [Flow's purpose](#flow's-purpose)
+    * [Flow vs Typescript](#flow-vs-typescript)
 2. [Getting started](#2-getting-started)
    * [Setup the compiler](#setup-the-compiler)
    * [Setup Flow client](#setup-flow-client)
@@ -13,14 +16,35 @@
 5. [Resources](#5-resources)
 
 
-## 1. What is Flow?
+## 1. Introduction
 
-According to Flow's site:
+### What is Flow?
+According to [Flow's site](https://flow.org/):
 
-> Flow is a static type checker for javascript
+> "Flow is a static type checker for javascript."
 
+Informally it is possible to say that static type checking is the process of verifying the type safety of a program 
+based on analysis of a program's sourcecode. If a program passes a static type checker, then the program is guaranteed 
+to satisfy some set of type safety properties for all possible inputs.[[1](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)]
+This process usually runs at compile time.
 
-<! -- What does Flow give us? -->
+### Flow's purpose
+
+From [Flow's paper](https://dl.acm.org/citation.cfm?doid=3152284.3133872) it is possible to see its main purpose: 
+
+> "Evolving and growing a JavaScript codebase is notoriously challenging. Developers spend a lot of time debugging silly 
+mistakes — like mistyped property names, out-of-order arguments, references to missing values, checks that never fail due 
+to implicit conversions, and so on — and worse, unraveling assumption and guarantees in code written by others."
+
+In other words, Flow catch a large number of common bugs with few false positives and therefore gives the developer the 
+confidence that her or his code is more robust.  
+
+### Flow vs Typescript
+
+Typescript is a programming language which is a superset of Javascript. Additionally, it also adds static typing. 
+There is an ongoing discussion about which option is better (Flow or typescript). Even though that decision abosolutly 
+depends on the context of the project, it is fair to mention that according to [this paper](http://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf) 
+both have roughly equivalent power in their ability to detect bugs.
 
 ## 2. Getting started
 
@@ -129,8 +153,10 @@ Then the compiler will analise all these files at compile time to ensure consist
 * [support-frontend](https://github.com/guardian/support-frontend)
 
 ## 5. Resources
+* [Static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)
 * [Flow website](https://flow.org/)
 * [Flow cheat sheet](https://www.saltycrane.com/flow-type-cheat-sheet/latest/)
 * [Fast and Precise Type Checking for JavaScript (Flow paper)](http://delivery.acm.org/10.1145/3140000/3133872/oopsla17-oopsla179.pdf?ip=86.163.232.185&id=3133872&acc=OA&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2EC1E31BC46E58D5B8&__acm__=1518982362_28510adef31f2c5ca06e91476f4d1e96)
+* [To Type or Not to Type: Quantifying Detectable Bugs in JavaScript (Paper comparing Typescript and Flow)](http://ttendency.cs.ucl.ac.uk/projects/type_study/documents/type_study.pdf)
 
 
