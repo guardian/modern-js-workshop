@@ -68,7 +68,7 @@ const GuDOM: GuDOMObj = (() => {
   }
   */
 
-  const createDOMNodeEl: (TagName) => ({[string]:string}) => DomNode = tag => (attrs = {}, ...children) => ({
+  const createDOMNodeEl: (TagName) => ({[string]:string}) => DomNode = tag => (attrs: {[string]:string} = {}, ...children: Array<DomNode>) => ({
     tag,
     attrs,
     children
