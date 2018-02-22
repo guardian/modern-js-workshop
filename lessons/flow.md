@@ -152,6 +152,69 @@ Then the compiler will analyse all these files at compile time to ensure consist
 
 ## 3. Writing Flow code
 
+### 3.1 [Primitive types](https://flow.org/en/docs/types/primitives/)
+
+#### Literal vs. wrapper types
+
+In Flow there are types for the literal values that are lowercase, and types for the wrapper objects which are 
+capitalized. Therefore, the type `Number` is not the same as the type `number`. The full list of primitive types is:
+
+* [`Booleans`](https://flow.org/en/docs/types/primitives/#toc-booleans)
+* [`Number`](https://flow.org/en/docs/types/primitives/#toc-numbers)
+* [`String`](https://flow.org/en/docs/types/primitives/#toc-strings)
+
+#### [`null` vs. `void`](https://flow.org/en/docs/types/primitives/#toc-null-and-void)
+
+The type of `null` is `null` but the type of `undefined` is `void`. Therefore, a function which input is a number and 
+returns `undefined`, its type will be `(number) => void`.
+
+#### [Maybe types](https://flow.org/en/docs/types/primitives/#toc-maybe-types)
+
+In order to define a maybe type, you need put a `?` before the type. In this way, the type defined, `void` and `null` 
+will be accepted.
+
+For example: 
+```flow js
+function foo (x: ?number) {
+  //....
+}
+
+```
+It will accept any number, `null` or `undefined` as its input. 
+
+#### Optional [object parameters](https://flow.org/en/docs/types/primitives/#toc-optional-object-properties) and [function parameters](https://flow.org/en/docs/types/primitives/#toc-optional-function-parameters)
+
+It is possible to declare a object property of a function argument by placing the `?` right after the variable name.
+
+```flow js
+function foo(value?: string) {
+  // ...
+}
+``` 
+
+`value` can be any sting and `undefined` but **not `null`**.
+
+### 3.2 [Mixed types](https://flow.org/en/docs/types/mixed/)
+
+In Flow we use Mixed types to indicates that a certain variable or argument can accept any kind of type. If you would like
+to interact with a variable which is `mixed` you need to ensure first that certain variable has a defined type.
+
+
+```flow js
+function stringify(value: mixed) {
+  if (typeof value === 'string') {
+    return "" + value; // Works!
+  } else {
+    return "";
+  }
+}
+```
+
+> Warning: Do not confused Mixed types with [`Any`](https://flow.org/en/docs/types/any/
+
+)
+
+
 ## 4. Where do we use it at The Guardian?
 * [frontend](https://github.com/guardian/frontend)
 * [support-frontend](https://github.com/guardian/support-frontend)
