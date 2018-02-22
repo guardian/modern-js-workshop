@@ -28,6 +28,10 @@ based on analysis of a program's sourcecode. If a program passes a static type c
 to satisfy some set of type safety properties for all possible inputs.[[1](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)]
 This process usually runs at compile time.
 
+The alternative to state type checking is dynamic type checking. Dynamic type checking is the process of verifying the 
+type safety of a program at runtime. The majority of the type-safe languages include some form of dynamic type checking,
+even if they also have a static type checker. 
+
 ### Flow's purpose
 
 From [Flow's paper](https://dl.acm.org/citation.cfm?doid=3152284.3133872) it is possible to see its main purpose: 
