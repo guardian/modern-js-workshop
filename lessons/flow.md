@@ -12,6 +12,14 @@
    * [Setup Flow client](#setup-flow-client)
    * [Prepare your files for Flow](#prepare-your-files-for-flow) 
 3. [Writing Flow code](#3-writing-flow-code)
+   * [Primitive types](#3-1-primitive-types)
+   * []()
+   * []()
+   * []()
+   * []()
+   * []()
+   * []()
+   
 4. [Where do we use it at The Guardian?](#4-where-do-we-use-it-at-the-guardian)
 5. [Resources](#5-resources)
 
@@ -210,10 +218,49 @@ function stringify(value: mixed) {
 }
 ```
 
-> Warning: Do not confused Mixed types with [`Any`](https://flow.org/en/docs/types/any/
+> Warning: Do not confused Mixed types with [`Any`](https://flow.org/en/docs/types/any/). **You should not use `Any`.** 
 
-)
+### 3.3 [Function types](https://flow.org/en/docs/types/functions/)
 
+#### [Return type of a function](https://flow.org/en/docs/types/functions/#toc-function-returns)
+
+We can add the return type of a function, by typing after the list of arguments.
+```flow js
+function foo(bar: string): number {
+  return 5;
+}
+```
+
+```flow js
+const method = (bar: string):number => {
+  return 5;
+}
+```
+
+#### [Rest parameters](https://flow.org/en/docs/types/functions/#toc-rest-parameters)
+
+It is possible to type the rest parameters sintax as an `Array`.
+
+```flow js
+function method(...args: Array<number>) {
+  // ...
+}
+```
+
+#### 3.4 [Object Types](https://flow.org/en/docs/types/objects/)
+#### 3.5 [Union types](https://flow.org/en/docs/types/unions/)
+#### 3.6 [Array Types](https://flow.org/en/docs/types/arrays/) 
+
+#### 3.7 More and more types:
+
+[Tuples](https://flow.org/en/docs/types/tuples/), [classes](https://flow.org/en/docs/types/classes/),
+[generics](https://flow.org/en/docs/types/generics/), [intersections](https://flow.org/en/docs/types/intersections/), etc. 
+
+
+#### [Arbitraty functions](https://flow.org/en/docs/types/functions/#toc-function-type)
+In the case you would like to express an arbitrary function, you should write `() => mixed`.
+
+> Warning: Do not use the `Function` type. Use `()=> mixed` instead. 
 
 ## 4. Where do we use it at The Guardian?
 * [frontend](https://github.com/guardian/frontend)
