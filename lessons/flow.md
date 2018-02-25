@@ -17,17 +17,9 @@
    * [Mixed Types]()
    * [Function Types]()
    * [Object Types]()
-   * []()
-   * []()
-   
-   
-   
-   
-   (https://flow.org/en/docs/types/objects/)
-   #### 3.5 [Union types](https://flow.org/en/docs/types/unions/)
-   #### 3.6 [Array Types](https://flow.org/en/docs/types/arrays/) 
-   #### 3.7 More and more types:
-   
+   * [Union types]()
+   * [Array Types]()
+   * [More and more types]()   
 4. [Where do we use it at The Guardian?](#4-where-do-we-use-it-at-the-guardian)
 5. [Resources](#5-resources)
 
