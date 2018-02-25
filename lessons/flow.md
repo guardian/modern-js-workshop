@@ -48,7 +48,7 @@ From [Flow's paper](https://dl.acm.org/citation.cfm?doid=3152284.3133872) it is 
 mistakes — like mistyped property names, out-of-order arguments, references to missing values, checks that never fail due 
 to implicit conversions, and so on — and worse, unraveling assumption and guarantees in code written by others."
 
-In other words, Flow catch a large number of common bugs with few false positives and therefore the developers are more 
+In other words, Flow catches a large number of common bugs with few false positives and therefore the developers are more 
 confident that their code is more robust.  
 
 ### Flow vs Typescript
