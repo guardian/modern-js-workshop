@@ -12,14 +12,13 @@
    * [Setup Flow client](#setup-flow-client)
    * [Prepare your files for Flow](#prepare-your-files-for-flow) 
 3. [Writing Flow code](#3-writing-flow-code)
-   * [Primitive types](#3-1-primitive-types)
-   * [Maybe Types]()
-   * [Mixed Types]()
-   * [Function Types]()
-   * [Object Types]()
-   * [Union types]()
-   * [Array Types]()
-   * [More and more types]()   
+   * [Primitive types](#31-primitive-types)
+   * [Mixed Types](#32-mixed-types)
+   * [Function Types](#33-function-types)
+   * [Object Types](#34-object-types)
+   * [Union types](#35-union-types)
+   * [Array Types](#36-array-types)
+   * [More and more types](#3.7-more-and-more-types)   
 4. [Where do we use it at The Guardian?](#4-where-do-we-use-it-at-the-guardian)
 5. [Resources](#5-resources)
 
@@ -334,7 +333,7 @@ let arr: number[] = [1, 2, 3];
 
 Read more about Array access in the [flow's documentation](https://flow.org/en/docs/types/arrays/#toc-array-access-is-unsafe). 
 
-#### 3.7 More and more types:
+#### 3.7 More and more types
 
 Above we covered a sub-set of Flow's types but there are many more: [Tuples](https://flow.org/en/docs/types/tuples/), 
 [classes](https://flow.org/en/docs/types/classes/), [generics](https://flow.org/en/docs/types/generics/), 
