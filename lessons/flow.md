@@ -168,9 +168,9 @@ Then the compiler will analyse all these files at compile time to ensure consist
 In Flow there are types for the literal values that are lowercase, and types for the wrapper objects which are 
 capitalized. Therefore, the type `Number` is not the same as the type `number`. The full list of primitive types is:
 
-* [`Booleans`](https://flow.org/en/docs/types/primitives/#toc-booleans)
-* [`Number`](https://flow.org/en/docs/types/primitives/#toc-numbers)
-* [`String`](https://flow.org/en/docs/types/primitives/#toc-strings)
+* [`booleans`](https://flow.org/en/docs/types/primitives/#toc-booleans)
+* [`number`](https://flow.org/en/docs/types/primitives/#toc-numbers)
+* [`string`](https://flow.org/en/docs/types/primitives/#toc-strings)
 
 #### 3.1.2 [`null` vs. `void`](https://flow.org/en/docs/types/primitives/#toc-null-and-void)
 
@@ -193,7 +193,7 @@ It will accept any number, `null` or `undefined` as its input.
 
 #### 3.1.4 Optional [object parameters](https://flow.org/en/docs/types/primitives/#toc-optional-object-properties) and [function parameters](https://flow.org/en/docs/types/primitives/#toc-optional-function-parameters)
 
-It is possible to declare a object property of a function argument by placing the `?` right after the variable name.
+It is possible to declare an object property of a function argument by placing the `?` right after the variable name.
 
 ```flow js
 function foo(value?: string) {
@@ -201,7 +201,7 @@ function foo(value?: string) {
 }
 ``` 
 
-`value` can be any sting and `undefined` but **not `null`**.
+`value` can be any string and `undefined` but **not `null`**.
 
 ### 3.2 [Mixed types](https://flow.org/en/docs/types/mixed/)
 
@@ -240,7 +240,7 @@ const method = (bar: string):number => {
 
 #### 3.3.2 [Rest parameters](https://flow.org/en/docs/types/functions/#toc-rest-parameters)
 
-It is possible to type the rest parameters sintax as an `Array`.
+It is possible to type the rest parameters syntax as an `Array`.
 
 ```flow js
 function method(...args: Array<number>) {
@@ -248,10 +248,10 @@ function method(...args: Array<number>) {
 }
 ```
 
-####  3.3.3 [Arbitraty functions](https://flow.org/en/docs/types/functions/#toc-function-type)
+####  3.3.3 [Arbitrary functions](https://flow.org/en/docs/types/functions/#toc-function-type)
 In the case you would like to express an arbitrary function, you should write `() => mixed`.
 
-> Warning: Do not use the `Function` type. Use `()=> mixed` instead. 
+> Warning: Do not use the `Function` type. Use `()=> mixed` instead. If you use Function, you will opt-out of the type checker.
 
 
 #### 3.4 [Object Types](https://flow.org/en/docs/types/objects/)
@@ -286,7 +286,7 @@ var obj: {
 };
 ```
 
-If we want to Exact match a object tyoe definition, we need to wrap the definition with `|`.
+If we want to Exact match an object type definition, we need to wrap the definition with `|`.
 
 ```flow js
 var obj: {|
