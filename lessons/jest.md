@@ -68,8 +68,8 @@ To run jest, we can just add the `jest` command to our `scripts` in `package.jso
 
 ```json
 {
-    scripts: {
-        test: jest
+    "scripts": {
+        "test": "jest"
     }
 }
 ```
