@@ -72,7 +72,7 @@ The Babel docs have pretty comprehensive info on this but it can sometimes be a 
   "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
 ```
-- Before this will work we actually need to install those plugins with `yarn add --dev @babel/env "@babel/plugin-proposal-object-rest-spread`
+- Before this will work we actually need to install those plugins with `yarn add --dev @babel/preset-env "@babel/plugin-proposal-object-rest-spread`
 
 #### Aside: Presets and plugins
 "Presets" are just a packaged list of "plugins"
