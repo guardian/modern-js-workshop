@@ -64,15 +64,21 @@ The Babel docs have pretty comprehensive info on this but it can sometimes be a 
 - For now we'll just need a file that tells babel what plugins we're using in a json format - the biggest use case for a `.babelrc` file
 ```json
 {
-  "presets": ["@babel/env", {
-    "targets": {
-      "browsers": ["> 1%", "last 2 versions", "IE >= 9"]
-    }
-  }],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "debug": true,
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "IE >= 9"]
+        }
+      }
+    ]
+  ],
   "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
 ```
-- Before this will work we actually need to install those plugins with `yarn add --dev @babel/env "@babel/plugin-proposal-object-rest-spread`
+- Before this will work we actually need to install those plugins with `yarn add --dev @babel/preset-env @babel/plugin-proposal-object-rest-spread`
 
 #### Aside: Presets and plugins
 "Presets" are just a packaged list of "plugins"
