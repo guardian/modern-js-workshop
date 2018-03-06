@@ -11,7 +11,7 @@ The first lesson expects you to have `node` installed. This will add `npm` as a 
 
 ## Lessons order: 
 
- 1. [Babel](/lessons/babel.md)
- 2. [Flow](/lessons/flow.md)
+ 1. [Babel](/lessons/babel.md) - [slides](https://goo.gl/pdT7yv)
+ 2. [Flow](/lessons/flow.md) - [slides](https://goo.gl/Lc8SHH)
  3. [Jest](/lessons/jest.md)
  4. [Webpack](/lessons/webpack.md)
