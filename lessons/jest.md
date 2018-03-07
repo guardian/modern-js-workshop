@@ -28,17 +28,17 @@ npm i --save-dev jest
 ```
 
 ### Using Jest with babel
-If you're using a late Node version, you'll be able to use most, if not all, of the stage-4 proposals from TC39. The main thing you *won't* get from this is [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). In order to use these, we'll need to take advantage of babel's ability to convert them into CommonJS modules.
+If you're using a late Node version, you'll be able to use most, if not all, of the stage-4 proposals from TC39. The main thing you *won't* get from this is [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). In order to use these, we'll need to take advantage of babel's ability to convert them into CommonJS modules. Fortunately, we're provided a package called `babel-jest` to allow babel to transpile jest specs.
 
 *Caveat* - The version of babel from the first lesson is a beta version of babel 7. Jest is not yet compatible with this, so we'll need to include `babel-core@^7.0.0-0` and  `regenerator-runtime` to get the same behaviour in the testing environment.
 
-Get the compatible version of `babel-core` and `regenerator-runtime`
+Get the compatible version of `babel-jest`, `babel-core` and `regenerator-runtime`
 ```
 // yarn
-yarn add --dev babel-core@^7.0.0-0 regenerator-runtime
+yarn add --dev babel-jest 'babel-core@^7.0.0-0' regenerator-runtime
 
 // npm
-npm i --save-dev babel-core@^7.0.0-0 regenerator-runtime
+npm i --save-dev babel-jest 'babel-core@^7.0.0-0' regenerator-runtime
 ```
 
 ### Configuring Jest
@@ -64,12 +64,12 @@ test('adds 1 and 2 to equal 3', () => {
 ```
 
 ## Running Jest
-To run jest, we can just add the `jest` command to our `scripts` in `package.json`. When you run this, it'll search `node_modules/.bin` for the `jest` file and run it:
+To run jest, we can just add the `jest ./src` command to our `scripts` in `package.json`. When you run this, it'll search `node_modules/.bin` for the `jest` file and run it against the `src` folder:
 
 ```json
 {
     "scripts": {
-        "test": "jest"
+        "test": "jest ./src"
     }
 }
 ```
