@@ -35,10 +35,10 @@ If you're using a late Node version, you'll be able to use most, if not all, of 
 Get the compatible version of `babel-jest`, `babel-core` and `regenerator-runtime`
 ```
 // yarn
-yarn add --dev babel-jest 'babel-core@^7.0.0-0' @babel/core regenerator-runtime
+yarn add --dev babel-jest 'babel-core@^7.0.0-0' regenerator-runtime
 
 // npm
-npm i --save-dev babel-jest 'babel-core@^7.0.0-0' @babel/core regenerator-runtime
+npm i --save-dev babel-jest 'babel-core@^7.0.0-0' regenerator-runtime
 ```
 
 ### Configuring Jest

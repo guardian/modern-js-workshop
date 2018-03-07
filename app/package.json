@@ -8,11 +8,10 @@
   "scripts": {
     "start": "http-server",
     "babel": "mkdir -p dist && babel src -d dist",
-    "test": "jest ./src"
+    "test": "jest ./src --verbose"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.39",
-    "@babel/core": "^7.0.0-beta.40",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.39",
     "@babel/preset-env": "^7.0.0-beta.39",
     "babel-core": "^7.0.0-0",
@@ -21,5 +20,7 @@
     "jest": "^22.4.2",
     "regenerator-runtime": "^0.11.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.40"
+  }
 }

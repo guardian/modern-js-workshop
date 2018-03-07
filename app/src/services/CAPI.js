@@ -1,9 +1,9 @@
+import {GuUtils} from '../utils/GuUtils';
+
 const API_BASE = "http://content.guardianapis.com";
 const API_KEY = "0ccb3e45-8ac1-429b-90aa-456ba71ec319";
 
-
-
-const CAPI = {
+export const CAPI = {
   fetchLatest: async (count = 25) => {
     const queryString = GuUtils.objectToQueryString({
       'page-size': count,
