@@ -1,26 +1,29 @@
 {
-  "name": "modern-js-workshop",
-  "version": "0.1.0",
-  "main": "index.js",
-  "repository": "https://github.com/guardian/modern-js-workshop",
-  "author": "The Guardian",
-  "license": "MIT",
-  "scripts": {
-    "start": "http-server",
-    "babel": "mkdir -p dist && babel src -d dist",
-    "test": "jest ./src --verbose"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.39",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.39",
-    "@babel/preset-env": "^7.0.0-beta.39",
-    "babel-core": "^7.0.0-0",
-    "babel-jest": "^22.4.1",
-    "http-server": "^0.11.1",
-    "jest": "^22.4.2",
-    "regenerator-runtime": "^0.11.1"
-  },
-  "dependencies": {
-    "@babel/core": "^7.0.0-beta.40"
-  }
+    "name": "modern-js-workshop",
+    "version": "0.1.0",
+    "main": "index.js",
+    "repository": "https://github.com/guardian/modern-js-workshop",
+    "author": "The Guardian",
+    "license": "MIT",
+    "scripts": {
+        "start": "http-server",
+        "test": "jest ./src --verbose",
+        "build": "webpack --mode production"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.0.0-beta.39",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.39",
+        "@babel/preset-env": "^7.0.0-beta.39",
+        "babel-core": "^7.0.0-0",
+        "babel-jest": "^22.4.1",
+        "babel-loader": "^7.1.4",
+        "http-server": "^0.11.1",
+        "jest": "^22.4.2",
+        "regenerator-runtime": "^0.11.1",
+        "webpack": "^4.1.1",
+        "webpack-cli": "^2.0.11"
+    },
+    "dependencies": {
+        "@babel/core": "^7.0.0-beta.40"
+    }
 }
