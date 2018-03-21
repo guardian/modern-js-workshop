@@ -181,6 +181,7 @@ module.exports = {
             {
                 test: /\.js$/, // regex to test the file's path against
                 use: 'babel-loader',
+                exclude: /node_modules/, // we only want to transpile our code
             },
         ],
     },
@@ -194,8 +195,6 @@ yarn build
 ```
 
 You can see that `dist/main.js` is now a bit bigger 😞 but has no ES6 in it 😀.
-
-> You will probably want to `exclude: /node_modules/` in the rule config too, in reality. Most (_most_) npm modules don't need transpiling and slows down compilation a lot. 
 
 Now that Webpack is invoking Babel for us, we can remove the Babel script from `package.json`:
 
